@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\dev\Library\include\Vector.h(109,5): warning C4984: 'if constexpr' is a C++17 language extension
+C:\dev\Library\include\Vector.h(158): message : see reference to class template instantiation 'brandon::Vector<T>' being compiled
+C:\dev\Library\include\Vector.h(134,4): warning C4984: 'if constexpr' is a C++17 language extension
+C:\dev\Library\include\Vector.h(143,4): warning C4984: 'if constexpr' is a C++17 language extension
+  Library.vcxproj -> C:\dev\Library\x64\Debug\Library.exe

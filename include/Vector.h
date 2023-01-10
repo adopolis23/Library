@@ -1,6 +1,7 @@
 #pragma once
 
 #include <math.h>
+#include <assert.h>
 
 
 namespace brandon {
@@ -15,16 +16,14 @@ namespace brandon {
 	public:
 
 		using pointer = T*;
+		using reference = T&;
+		using const_reference = const T&;
 		using size_type = std::size_t;
 		using alloc_traits = std::allocator_traits<std::allocator<T>>;
 
 
 		//constructors
-		Vector() { 
-		grow_(); 
-		grow_();
-		grow_();
-		}
+		Vector() { }
 
 
 
@@ -33,6 +32,48 @@ namespace brandon {
 		size_type Capacity() const { return m_capacity;  }
 		size_type max_size() const { return alloc_traits::max_size(m_allocator); }
 		//size_type max_size() const { return std::allocator_traits <std::allocator<T>>::max_size(m_allocator); }
+
+
+		//adding item
+
+		void push_back(const T& value) {
+			//if no room for element then grow; then construct item at back of buffer; increase size
+
+			if (Size() >= Capacity())
+				grow_();
+
+			//m_buffer[Size()] = value;
+			alloc_traits::construct(m_allocator, &m_buffer[m_size], value);
+			++m_size;
+		}
+
+
+
+
+		//removing elements
+
+
+
+
+		//retrieving items
+
+		reference at(size_type pos) {
+			assert(pos < Size());
+			return m_buffer[pos];
+		}
+
+
+
+
+		//operator overloads
+
+
+		reference operator[](size_type pos) {
+			assert(pos < Size());
+			return m_buffer[pos];
+		}
+
+
 
 
 	private:
