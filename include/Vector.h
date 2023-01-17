@@ -20,6 +20,87 @@ namespace brandon {
 		using const_reference = const T&;
 		using size_type = std::size_t;
 		using alloc_traits = std::allocator_traits<std::allocator<T>>;
+		using difference_type = std::ptrdiff_t;
+
+
+
+		class iterator {
+
+		public:
+			using size_type = std::size_t;
+			using reference = T&;
+			using pointer = T*;
+
+			iterator(pointer ptr) {
+				this->m_data = ptr;
+			}
+
+			//increment and decrement
+			iterator& operator++() {
+				++m_data;
+				return *this; 
+			}
+
+			iterator operator++(int) {
+				iterator ret = iterator{ *this };
+				++m_data;
+				return ret;
+			}
+
+			iterator& operator--() {
+				--m_data;
+				return *this;
+			}
+
+
+			//addition of values
+			iterator& operator+=(difference_type n) {
+				m_data += n;
+				return *this;
+			}
+
+			iterator& operator-=(difference_type n) {
+				m_data -= n;
+				return *this;
+			}
+
+			reference operator*() {
+				return *m_data; 
+			}
+
+
+			friend bool operator==(const iterator& left, const iterator& right) {
+				return (left.m_data == right.m_data);
+			}
+
+			friend bool operator!=(const iterator& left, const iterator& right) {
+				return !(left == right);
+			}
+
+
+			friend bool operator<(const interator& left, const iterator right) {
+				return left.m_data < right.m_data; 
+			}
+
+			friend bool operator>(const iterator& left, const iterator& right) {
+				return right < left; 
+			}
+
+			friend bool operator<=(const interator& left, const iterator right) {
+				return (left < right || left == right);
+			}
+
+			friend bool operator>=(const interator& left, const iterator right) {
+				return (left > right || left == right);
+			}
+
+
+
+		private:
+			pointer m_data;
+
+		};
+
 
 
 		//constructors
@@ -51,7 +132,12 @@ namespace brandon {
 
 
 		//removing elements
-
+		T pop_back() {
+			T tmp = m_buffer[m_size-1];
+			destroy_one_(back());
+			--m_size;
+			return tmp;
+		}
 
 
 
@@ -63,6 +149,13 @@ namespace brandon {
 		}
 
 
+		reference back() {
+			return m_buffer[m_size-1];
+		}
+
+		reference front() {
+			return m_buffer;
+		}
 
 
 		//operator overloads
@@ -72,6 +165,11 @@ namespace brandon {
 			assert(pos < Size());
 			return m_buffer[pos];
 		}
+
+
+		//iterators
+		iterator begin() { return iterator(m_buffer); }
+		iterator end() { return iterator(&m_buffer[m_size]); }
 
 
 
