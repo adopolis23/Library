@@ -78,7 +78,7 @@ namespace brandon {
 			}
 
 
-			friend bool operator<(const interator& left, const iterator right) {
+			friend bool operator<(const iterator& left, const iterator& right) {
 				return left.m_data < right.m_data; 
 			}
 
@@ -86,11 +86,11 @@ namespace brandon {
 				return right < left; 
 			}
 
-			friend bool operator<=(const interator& left, const iterator right) {
+			friend bool operator<=(const iterator& left, const iterator& right) {
 				return (left < right || left == right);
 			}
 
-			friend bool operator>=(const interator& left, const iterator right) {
+			friend bool operator>=(const iterator& left, const iterator& right) {
 				return (left > right || left == right);
 			}
 
@@ -105,6 +105,29 @@ namespace brandon {
 
 		//constructors
 		Vector() { }
+
+		
+		//creates a vector with a count and value
+		Vector(size_type count, const T& value) {
+			change_capacity_(count);
+
+			for (size_type i = 0; i < count; i++) {
+				//m_buffer[i] = value;
+				push_back(value);
+			}
+		}
+
+		//creats a vector from an iterator of another vector
+		Vector(iterator first, iterator last) {
+			while (first != last) {
+				push_back(*first);
+				++first;
+			}
+		}
+
+		Vector(const Vector& other) : Vector{other} {
+			;//
+		}
 
 
 
