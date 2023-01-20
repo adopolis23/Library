@@ -125,8 +125,31 @@ namespace brandon {
 			}
 		}
 
-		Vector(const Vector& other) : Vector{other} {
-			;//
+		Vector(const Vector& other) {
+			m_buffer = alloc_traits::allocate(m_allocator, other.Size());
+
+			if (other.Size() > 0) {
+			
+
+				//if the type of the vector is trvially copyable just do an unit copy to new memory
+				if constexpr (std::is_trivially_copyable_v<T>) {
+					
+					for (int i = 0; i < other.Size(); i++) {
+						push_back(other[i]);
+					}
+
+				}
+				else {
+					
+					//No idea for this one
+
+				}
+
+
+			}
+
+			m_size = other.Size();
+			m_capacity = other.Capacity();
 		}
 
 
@@ -140,6 +163,7 @@ namespace brandon {
 
 		//adding item
 
+	
 		void push_back(const T& value) {
 			//if no room for element then grow; then construct item at back of buffer; increase size
 
@@ -185,6 +209,11 @@ namespace brandon {
 
 
 		reference operator[](size_type pos) {
+			assert(pos < Size());
+			return m_buffer[pos];
+		}
+
+		reference operator[](size_type pos) const {
 			assert(pos < Size());
 			return m_buffer[pos];
 		}
@@ -270,6 +299,9 @@ namespace brandon {
 			}
 		}
 
+		reference getData() {
+			return m_buffer; 
+		}
 
 
 

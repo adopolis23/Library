@@ -1,1 +1,2 @@
 C:\dev\Library\x64\Debug\Library.exe
+E:\dev\Library\x64\Debug\Library.exe
