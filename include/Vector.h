@@ -3,7 +3,6 @@
 #include <math.h>
 #include <assert.h>
 
-
 namespace brandon {
 
 	//TODO: look up constexpr
