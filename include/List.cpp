@@ -25,7 +25,10 @@ namespace brandon {
 		using alloc_traits = std::allocator_traits<std::allocator<Type>>;
 
 		class iterator {
-			
+		public:
+			Node_Base* m_ptr;
+
+			iterator(Node_Base* node) : m_ptr{ node } {}
 		};
 
 
@@ -39,6 +42,17 @@ namespace brandon {
 			first->m_Next = last;
 			last->m_Prev = first;
 		}
+
+
+	private:
+		//type allocator
+		std::allocator<T> m_allocator;
+
+		//Node allocator
+		std::allocator<Node> m_NodeAllocator;
+
+		pointer m_buffer = nullptr;
+
 
 
 	};
