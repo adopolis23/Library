@@ -48,3 +48,7 @@ project "Application"
 
     filter "configurations:Release"
         optimize "On"
+
+    postbuildcommands {
+        '{COPY} "%{wks.location}/Library/bin/%{cfg.buildcfg}/MyLibrary.dll" "%{cfg.targetdir}"'
+    }
