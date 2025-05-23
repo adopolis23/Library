@@ -1,0 +1,34 @@
+## Premake-generated
+Makefile
+*.make
+*.workspace
+*.project
+*.sln
+*.vcxproj*
+*.opensdf
+
+## Visual Studio folders and files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sdf
+*.cache
+*.db
+*.VC.db
+*.VC.VC.opendb
+
+## Build artifacts
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+*.lib
+*.pdb
+*.ipch
+*.iobj
+*.idb
+*.exp
+*.log
+*.pch
+*.ilk

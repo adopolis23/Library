@@ -16,9 +16,12 @@ project "MyLibrary"
         systemversion "latest"
     
     filter "configurations:Debug"
-        defines { "DEBUG" }  --this to be used for macros when defining __declspec(dllexport)
+        defines { "DEBUG" }  
         symbols "On"
     
     filter "configurations:Release"
         defines { "NDEBUG" }
         optimize "On"
+    
+    filter "configurations:*"
+        defines { "LIBRARY_BUILD_DLL" } --this to be used for macros when defining __declspec(dllexport)
