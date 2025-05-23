@@ -1,7 +1,7 @@
 workspace "MyWorkspace"
     configurations {"Debug", "Release"}
     architecture "x86_64"
-    startproject "MyLibrary"
+    startproject "Application"
 
 project "MyLibrary"
     kind "SharedLib" --tells premake to build a DLL
@@ -37,7 +37,7 @@ project "Application"
 
     files { "Application/src/**.cpp" }
 
-    includedirs { "MyLibrary" }
+    includedirs { "Library/src" }
     links { "MyLibrary" }
 
     filter "system:windows"

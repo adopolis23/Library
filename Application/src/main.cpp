@@ -1,7 +1,6 @@
-
-#include "../../Library/src/Vector.h"
+#include "Vector.h"
 
 int main(int argc, char** argv)
 {
-	Hello();
+	MyLibrary::Vector<int>* vector = new MyLibrary::Vector<int>();
 }
