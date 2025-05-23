@@ -7,10 +7,10 @@ project "MyLibrary"
     kind "SharedLib" --tells premake to build a DLL
     language "C++"
     cppdialect "C++17"
-    targetdir "bin/%{cfg.buildcfg}"
-    objdir "bin-int/%{cfg.buildcfg}" --intermediate directory
+    targetdir "Library/bin/%{cfg.buildcfg}"
+    objdir "Library/bin-int/%{cfg.buildcfg}" --intermediate directory
 
-    files { "src/**.h", "src/**.cpp" } 
+    files { "Library/src/**.h", "Library/src/**.cpp" } 
 
     filter "system:windows"
         systemversion "latest"
@@ -25,3 +25,26 @@ project "MyLibrary"
     
     filter "configurations:*"
         defines { "LIBRARY_BUILD_DLL" } --this to be used for macros when defining __declspec(dllexport)
+
+
+-- Client EXE project
+project "Application"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++17"
+    targetdir "Application/bin/%{cfg.buildcfg}"
+    objdir "Application/bin-int/%{cfg.buildcfg}"
+
+    files { "Application/src/**.cpp" }
+
+    includedirs { "MyLibrary" }
+    links { "MyLibrary" }
+
+    filter "system:windows"
+        systemversion "latest"
+
+    filter "configurations:Debug"
+        symbols "On"
+
+    filter "configurations:Release"
+        optimize "On"
