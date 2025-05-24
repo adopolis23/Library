@@ -39,6 +39,7 @@ namespace MyLibrary
 		//operators
 		Vector<T, Allocator>& operator= (const Vector<T>& other); //equivelant to this.operator=(other)
 		ref_type operator[] (int i);
+		const T& operator[] (int i) const;
 
 	private:
 		//constructs elements, important for complex types
@@ -211,10 +212,18 @@ namespace MyLibrary
 	}
 
 	template<class T, class Allocator>
+	const T& Vector<T, Allocator>::operator[](int i) const
+	{
+		return _data[i];
+	}
+
+	template<class T, class Allocator>
 	inline T& Vector<T, Allocator>::operator[](int i)
 	{
 		//TODO: Implement reverse indexing ie. vec[-1] should return last element
 		return _data[i];
 	}
+
+
 
 };

@@ -49,6 +49,37 @@ project "Application"
     filter "configurations:Release"
         optimize "On"
 
-    postbuildcommands {
-        '{COPY} "%{wks.location}/Library/bin/%{cfg.buildcfg}/MyLibrary.dll" "%{cfg.targetdir}"'
+    
+    --dont need the dll or lib as this is all a template in a header
+    --postbuildcommands {
+        --'{COPY} "%{wks.location}/Library/bin/%{cfg.buildcfg}/MyLibrary.dll" "%{cfg.targetdir}"'
+    --}
+
+-- === GoogleTest ===
+project "gtest"
+    kind "StaticLib"
+    language "C++"
+    cppdialect "C++17"
+    targetdir "Tests/bin/%{cfg.buildcfg}"
+    objdir "Tests/bin-int/%{cfg.buildcfg}"
+    files { "external/googletest/googletest/src/**.cc" }
+    includedirs { "external/googletest/googletest/include", "external/googletest/googletest" }
+
+-- === Test Project ===
+project "MyLibraryTests"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++17"
+    targetdir "Tests/bin/%{cfg.buildcfg}"
+    objdir "Tests/bin-int/%{cfg.buildcfg}"
+    files { "Tests/src/**.cpp", "Tests/src/**.h" }
+
+    includedirs {
+        "Library/src",
+        "external/googletest/googletest/include"
+    }
+
+    links {
+        --"MyLibrary",
+        "gtest"
     }
