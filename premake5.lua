@@ -38,7 +38,7 @@ project "Application"
     files { "Application/src/**.cpp" }
 
     includedirs { "Library/src" }
-    links { "MyLibrary" }
+    --links { "MyLibrary" }
 
     filter "system:windows"
         systemversion "latest"
