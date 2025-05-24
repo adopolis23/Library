@@ -27,6 +27,7 @@ namespace MyLibrary
 		//constructors
 		Vector(); //no args
 		Vector(int capacity); //size of initial allocation
+		//Vector(const Vector<T, Allocator>& other);
 		~Vector();
 
 		//member functions
@@ -36,7 +37,7 @@ namespace MyLibrary
 		int GetSize() const;
 
 		//operators
-		Vector<T>& operator= (const Vector<T>& other); //equivelant to this.operator=(other)
+		Vector<T, Allocator>& operator= (const Vector<T>& other); //equivelant to this.operator=(other)
 		ref_type operator[] (int i);
 
 	private:
@@ -84,6 +85,19 @@ namespace MyLibrary
 
 		_ConstructElements();
 	}
+
+	//template<class T, class Allocator>
+	//Vector<T, Allocator>::Vector(const Vector<T, Allocator>& other)
+	//	: _size(other._size), _capacity(other._capacity)
+	//{
+	//	_data = Allocator.Allocate(_capacity);
+
+	//	for (size_type i = 0; i < _size; i++)
+	//	{
+	//		//constructs T at each spot, calls T's copy constructor
+	//		new(_data + i) T(other._data[i]);
+	//	}
+	//}
 
 	//destructor
 	template <typename T, class Allocator>
@@ -170,7 +184,7 @@ namespace MyLibrary
 	}
 
 	template<class T, class Allocator>
-	inline Vector<T>& Vector<T, Allocator>::operator=(const Vector<T>& other)
+	inline Vector<T, Allocator>& Vector<T, Allocator>::operator=(const Vector<T>& other)
 	{
 		if (this != &other)
 		{
@@ -180,7 +194,7 @@ namespace MyLibrary
 			Allocator.Deallocate(_data, _size);
 
 			//allocate and copy
-			Allocator.Allocate(_data, other._capacity);
+			_data = Allocator.Allocate(other._capacity);
 
 			this->_size = new_size;
 			this->_capacity = other._capacity;
