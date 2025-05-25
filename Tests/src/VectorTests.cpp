@@ -3,6 +3,8 @@
 
 namespace VectorTests {
 
+
+    // --- Basic Vector Tests ---
     TEST(VectorTests, AtRetrievesValue) {
 
         MyLibrary::Vector<int> vec;
@@ -86,4 +88,59 @@ namespace VectorTests {
         EXPECT_EQ(vec2[3], 4);
     }
 
+    TEST(VectorTests, LargeCapacityTest)
+    {
+        MyLibrary::Vector<int> vec;
+
+        int count = 10000;
+
+        for (int i = 0; i < count; i++)
+        {
+            vec.PushBack(i);
+        }
+
+        EXPECT_EQ(vec.GetSize(), count);
+    }
+
+
+    // --- Vector Iterator Tests ---
+    TEST(VectorIteratorTests, BeginIteratorWorks)
+    {
+        MyLibrary::Vector<int> vec;
+        vec.PushBack(1);
+        vec.PushBack(2);
+        vec.PushBack(3);
+        vec.PushBack(4);
+
+        Iterator<int> iter = vec.Begin();
+        EXPECT_EQ(*iter, 1);
+    }
+
+    TEST(VectorIteratorTests, EndIteratorWorks)
+    {
+        MyLibrary::Vector<int> vec;
+        vec.PushBack(1);
+        vec.PushBack(2);
+        vec.PushBack(3);
+        vec.PushBack(4);
+
+        Iterator<int> iter = vec.End();
+        EXPECT_EQ(*iter, 4);
+    }
+
+    TEST(VectorIteratorTests, EqualOperatorWorks)
+    {
+        MyLibrary::Vector<int> vec;
+        vec.PushBack(1);
+        vec.PushBack(2);
+        vec.PushBack(3);
+
+        for (Iterator<int> i = vec.Begin(); i != vec.End(); i++)
+        {
+            if (i == vec.End())
+            {
+                EXPECT_EQ(*i, 3);
+            }
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Allocator.h"
+#include "Iterator.h"
 
 #include <iostream>
 #include <malloc.h>
@@ -35,6 +36,10 @@ namespace MyLibrary
 		void PushBack(value_type item);
 		std::string ToString() const;
 		int GetSize() const;
+
+		//iterator member functions
+		Iterator<T> Begin();
+		Iterator<T> End();
 
 		//operators
 		Vector<T, Allocator>& operator= (const Vector<T>& other); //equivelant to this.operator=(other)
@@ -224,6 +229,18 @@ namespace MyLibrary
 		return _data[i];
 	}
 
+
+	template<class T, class Allocator>
+	Iterator<T> Vector<T, Allocator>::Begin()
+	{
+		return Iterator<T>(_data);
+	}
+
+	template<class T, class Allocator>
+	Iterator<T> Vector<T, Allocator>::End()
+	{
+		return Iterator<T>(_data + _size - 1);
+	}
 
 
 };
