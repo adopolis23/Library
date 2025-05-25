@@ -11,9 +11,11 @@ This repository has 3 main projects within it that get build with premake (instr
 * Library
     Where the main data structures are implemented. Configured to build a DLL however at the time of writing this all implementations are templates in header files so no DLL is necessesary.
 <br>
+
 * Application
     A test application that used the library data structures.
 <br>
+
 * MyLibraryTests
     Unit tests of the data structures implemented with Google Test.
 
