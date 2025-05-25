@@ -1,26 +1,42 @@
-# C++ Library
-Standard C++ data structures implemented by me from scatch.
-Items implemented so far:
+# 📦 C++ Library – Data Structures From Scratch
 
-* Vector
-* Iterator
-* Allocator
+A modern C++ library featuring standard data structures implemented from the ground up — no shortcuts, just pure C++ fundamentals.
 
-This repository has 3 main projects within it that get build with premake (instructions on building below) these projects are:
+## 📚 What's Included
 
-* Library
-    Where the main data structures are implemented. Configured to build a DLL however at the time of writing this all implementations are templates in header files so no DLL is necessesary.
-<br>
+The following components have been implemented so far:
 
-* Application
-    A test application that used the library data structures.
-<br>
+- ✅ **Vector** – Dynamic array with growth strategy  
+- ✅ **Iterator** – Custom iterator class with STL-like behavior  
+- ✅ **Allocator** – Memory allocator abstraction
 
-* MyLibraryTests
-    Unit tests of the data structures implemented with Google Test.
+---
 
-## Building The Project
-This project uses the premake build system. This can be used to either generate the full Visual Studio project on windows or the necessary Make files on linux. The premake executable is included in this repo.
+## 🏗️ Project Structure
+
+This repository contains **three main projects**, all managed via [Premake5](https://premake.github.io/). Here's a breakdown:
+
+### 📁 `Library/`
+The core library where all data structures are implemented.
+
+> 🔧 Built as a DLL (optional), though most implementations are header-only templates and don't require linking.
+
+---
+
+### 🧪 `MyLibraryTests/`
+Unit tests written using **Google Test** to ensure correctness and stability of each data structure.
+
+---
+
+### 🧪 `Application/`
+A basic test application that utilizes and showcases the library's data structures in practice.
+
+---
+
+## ⚙️ Building the Project
+
+This project uses **Premake5** to generate build files for different platforms. The `premake5` executable is included in the repository for convenience.
+
 
 To build on windows (for visual studio 2022):
 ```
