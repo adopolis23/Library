@@ -46,7 +46,7 @@ namespace VectorTests {
         EXPECT_EQ(vec.GetSize(), 4);
     }
 
-    TEST(VectorTests, ConstSquareBracketsOperatorWorks)
+    TEST(VectorTests, ConstSquareBracketsOperator)
     {
         MyLibrary::Vector<int> vec;
         vec.PushBack(1);
@@ -56,9 +56,11 @@ namespace VectorTests {
 
         EXPECT_EQ(vec[1], 2);
         EXPECT_EQ(vec[3], 4);
+        EXPECT_EQ(vec[-1], 4);
+        EXPECT_EQ(vec[-2], 3);
     }
 
-    TEST(VectorTests, SquareBracketsOperatorWorks)
+    TEST(VectorTests, SquareBracketsOperator)
     {
         MyLibrary::Vector<int> vec;
         vec.PushBack(1);
@@ -73,7 +75,7 @@ namespace VectorTests {
         EXPECT_EQ(vec[3], 100);
     }
 
-    TEST(VectorTests, EqualsOperatorWorks)
+    TEST(VectorTests, EqualsOperator)
     {
         MyLibrary::Vector<int> vec;
         vec.PushBack(1);
@@ -86,6 +88,60 @@ namespace VectorTests {
 
         EXPECT_EQ(vec2[1], 2);
         EXPECT_EQ(vec2[3], 4);
+    }
+
+    TEST(VectorTests, Resize)
+    {
+        MyLibrary::Vector<int> vec;
+        vec.PushBack(1);
+        vec.PushBack(2);
+        vec.PushBack(3);
+        vec.PushBack(4);
+        vec.PushBack(5);
+        vec.PushBack(6);
+        vec.Resize(4);
+        
+        EXPECT_EQ(*(vec.End()), 4);
+
+        vec.Resize(10, 1);
+
+        EXPECT_EQ(*(vec.End()), 1);
+    }
+
+    TEST(VectorTests, Capacity)
+    {
+        MyLibrary::Vector<int> vec;
+        vec.PushBack(1);
+        vec.PushBack(2);
+        vec.PushBack(3);
+        vec.PushBack(4);
+
+        EXPECT_EQ(vec.Capacity(), 4);
+
+        vec.PushBack(4);
+
+        EXPECT_EQ(vec.Capacity(), 8);
+
+        MyLibrary::Vector<int> vec2(10);
+        vec2.PushBack(1);
+        vec2.PushBack(2);
+
+        EXPECT_EQ(vec2.Capacity(), 10);
+    }
+
+    TEST(VectorTests, Empty)
+    {
+        MyLibrary::Vector<int> vec;
+        vec.PushBack(1);
+        vec.PushBack(2);
+        vec.PushBack(3);
+        vec.PushBack(4);
+
+        EXPECT_EQ(vec.Empty(), false);
+
+        MyLibrary::Vector<int> vec2;
+
+        EXPECT_EQ(vec2.Empty(), true);
     }
 
     TEST(VectorTests, LargeCapacityTest)
@@ -104,7 +160,7 @@ namespace VectorTests {
 
 
     // --- Vector Iterator Tests ---
-    TEST(VectorIteratorTests, BeginIteratorWorks)
+    TEST(VectorIteratorTests, BeginIterator)
     {
         MyLibrary::Vector<int> vec;
         vec.PushBack(1);
@@ -116,7 +172,7 @@ namespace VectorTests {
         EXPECT_EQ(*iter, 1);
     }
 
-    TEST(VectorIteratorTests, EndIteratorWorks)
+    TEST(VectorIteratorTests, EndIterator)
     {
         MyLibrary::Vector<int> vec;
         vec.PushBack(1);
@@ -128,7 +184,7 @@ namespace VectorTests {
         EXPECT_EQ(*iter, 4);
     }
 
-    TEST(VectorIteratorTests, EqualOperatorWorks)
+    TEST(VectorIteratorTests, EqualOperator)
     {
         MyLibrary::Vector<int> vec;
         vec.PushBack(1);
