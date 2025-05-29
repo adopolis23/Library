@@ -2,96 +2,101 @@
 
 #include <cstddef>
 
-template <class T>
-class Iterator
+namespace MyLibrary
 {
 
-public:
-	Iterator(T* p) : ptr(p) {}
+	template <class T>
+	class Iterator
+	{
 
-	bool operator== (const Iterator& other);
-	bool operator!= (const Iterator& other);
+	public:
+		Iterator(T* p) : ptr(p) {}
 
-	//when dereferencing the iterator we want to return the dereferenced pointer
-	T& operator*() const;
+		bool operator== (const Iterator& other);
+		bool operator!= (const Iterator& other);
 
-	//for iterator + int
-	Iterator<T> operator+(std::ptrdiff_t n) const;
+		//when dereferencing the iterator we want to return the dereferenced pointer
+		T& operator*() const;
 
-	//pre-increment/decrement
-	Iterator<T>& operator++();
-	Iterator<T>& operator--();
+		//for iterator + int
+		Iterator<T> operator+(std::ptrdiff_t n) const;
 
-	//post-increment
-	Iterator<T>& operator++(int);
-	Iterator<T>& operator--(int);
+		//pre-increment/decrement
+		Iterator<T>& operator++();
+		Iterator<T>& operator--();
 
-private:
-	//pointer to the current data
-	T* ptr;
+		//post-increment
+		Iterator<T>& operator++(int);
+		Iterator<T>& operator--(int);
 
-};
+	private:
+		//pointer to the current data
+		T* ptr;
 
-template<class T>
-bool Iterator<T>::operator==(const Iterator& other)
-{
-	return (this->ptr == other.ptr);
-}
+	};
 
-template<class T>
-bool Iterator<T>::operator!=(const Iterator& other)
-{
-	return (this->ptr != other.ptr);
-}
+	template<class T>
+	bool Iterator<T>::operator==(const Iterator& other)
+	{
+		return (this->ptr == other.ptr);
+	}
 
-template<class T>
-T& Iterator<T>::operator*() const
-{
-	return *ptr;
-}
+	template<class T>
+	bool Iterator<T>::operator!=(const Iterator& other)
+	{
+		return (this->ptr != other.ptr);
+	}
 
-template<class T>
-Iterator<T> Iterator<T>::operator+(std::ptrdiff_t n) const
-{
-	return Iterator<T>(ptr + n);
-}
+	template<class T>
+	T& Iterator<T>::operator*() const
+	{
+		return *ptr;
+	}
 
-template<class T>
-Iterator<T>& Iterator<T>::operator++()
-{
-	++ptr;
-	return *this;
-}
+	template<class T>
+	Iterator<T> Iterator<T>::operator+(std::ptrdiff_t n) const
+	{
+		return Iterator<T>(ptr + n);
+	}
 
-template<class T>
-Iterator<T>& Iterator<T>::operator--()
-{
-	--ptr;
-	return *this;
-}
+	template<class T>
+	Iterator<T>& Iterator<T>::operator++()
+	{
+		++ptr;
+		return *this;
+	}
 
-template<class T>
-Iterator<T>& Iterator<T>::operator++(int)
-{
-	//store current this
-	Iterator tmp = *this;
+	template<class T>
+	Iterator<T>& Iterator<T>::operator--()
+	{
+		--ptr;
+		return *this;
+	}
 
-	//increment - this calls the operator++() implementation above
-	++(*this);
+	template<class T>
+	Iterator<T>& Iterator<T>::operator++(int)
+	{
+		//store current this
+		Iterator tmp = *this;
 
-	//return temp value
-	return tmp;
-}
+		//increment - this calls the operator++() implementation above
+		++(*this);
 
-template<class T>
-Iterator<T>& Iterator<T>::operator--(int)
-{
-	//store current this
-	Iterator tmp = *this;
+		//return temp value
+		return tmp;
+	}
 
-	//increment - this calls the operator++() implementation above
-	--(*this);
+	template<class T>
+	Iterator<T>& Iterator<T>::operator--(int)
+	{
+		//store current this
+		Iterator tmp = *this;
 
-	//return temp value
-	return tmp;
+		//increment - this calls the operator++() implementation above
+		--(*this);
+
+		//return temp value
+		return tmp;
+	}
+
 }

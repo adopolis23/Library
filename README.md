@@ -9,6 +9,8 @@ The following components have been implemented so far:
 - ✅ **Vector** – Dynamic array with growth strategy  
 - ✅ **Iterator** – Custom iterator class with STL-like behavior  
 - ✅ **Allocator** – Memory allocator abstraction
+- ✅ **Pair** – Simple data structure allowing storage of two objects as a unit
+- ✅ **HashTable** – Associative container using seperate chaining
 
 ---
 
